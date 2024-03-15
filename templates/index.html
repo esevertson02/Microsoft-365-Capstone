@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Microsoft 365 Licensing Tool Recommendation</h1>
-        <form action="/recommend" method="post">
+        <form action="{{ url_for('recommend') }}" method="post">
             <h2>Select Features Your Organization Needs:</h2>
             {% for plan, features in tools.items() %}
                 <div class="plan">
