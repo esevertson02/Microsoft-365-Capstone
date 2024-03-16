@@ -8,7 +8,7 @@ nce_pricelist = pd.read_csv('NCE_Pricelist.csv')
 
 # Dictionary of Microsoft 365 tools and their features
 tools = {
-    "Microsoft 365 Features": ["Identity and Access Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile versions of Office apps", "Desktop versions of Office apps","Office 365 Calendar", "Teams", "SharePoint", "Yammer", "Advanced Threat Protection", "Intune device management", "Azure Information Protection"],
+    "Microsoft 365 Features": ["Identity and Access Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Desktop versions of Microsoft 365 apps","Microsoft Teams","Microsoft Bookings","Microsoft Planner", "Microsoft Forms", "Microsoft Lists", "Microsoft Access", "Microsoft Publisher", "Microsoft Stream", "Microsoft SharePoint","Microsoft Loop (Webinar Hosting and Functionality)","Video Editing (Microsoft Clipchamp)", "Yammer", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Intune device management", "Azure Information Protection"],
     "Do you have more than 300 employees in need of licenses?": ["Yes", "No"],
 }
 
