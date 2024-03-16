@@ -12,7 +12,12 @@
     <div class="container">
         <h1>Microsoft 365 Licensing Tool Recommendation</h1>
         <form action="{{ url_for('recommend') }}" method="post">
-            <h2>Select Features Your Organization Needs:</h2>
+            <h2>Every plan comes with:</h2>
+            <p>1 TB Cloud Storage per user - Anytime Phone and Web Support
+            </p>
+            <strong>
+                <h2>Select Features Your Organization Needs:</h2>
+            </strong>
             {% for plan, features in tools.items() %}
             <div class="plan">
                 <h3>{{ plan }}</h3>

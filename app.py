@@ -8,10 +8,10 @@ nce_pricelist = pd.read_csv('NCE_Pricelist.csv')
 
 # Dictionary of Microsoft 365 tools and their features
 tools = {
-    "Microsoft 365 Business Basic": ["Email", "Web versions of Office apps", "1TB OneDrive storage", "Teams", "SharePoint", "Yammer"],
-    "Microsoft 365 Business Standard": ["Email", "Web versions of Office apps", "Desktop versions of Office apps", "1TB OneDrive storage", "Teams", "SharePoint", "Yammer"],
-    "Microsoft 365 Business Premium": ["Email", "Web versions of Office apps", "Desktop versions of Office apps", "1TB OneDrive storage", "Teams", "SharePoint", "Yammer", "Advanced Threat Protection", "Intune device management", "Azure Information Protection"],
+    "Microsoft 365 Features": ["Identity and Access Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile versions of Office apps", "Desktop versions of Office apps","Office 365 Calendar", "Teams", "SharePoint", "Yammer", "Advanced Threat Protection", "Intune device management", "Azure Information Protection"],
+    "Do you have more than 300 employees in need of licenses?": ["Yes", "No"],
 }
+
 
 @app.route('/')
 def index():
