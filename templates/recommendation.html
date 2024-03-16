@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommendation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>Recommended Licensing Product</h1>
         {% if recommended_plan %}
-            <h2>Recommended Plan: {{ recommended_plan }}</h2>
-            <!-- Additional details about the recommended plan can be displayed here -->
+        <h2>Recommended Plan: {{ recommended_plan }}</h2>
+        <!-- Additional details about the recommended plan can be displayed here -->
         {% else %}
-            <p>No recommended licensing product found.</p>
+        <p>No recommended licensing product found.</p>
         {% endif %}
     </div>
 </body>
+
 </html>
