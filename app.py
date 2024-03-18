@@ -8,14 +8,44 @@ nce_pricelist = pd.read_csv('NCE_Pricelist.csv')
 
 # Dictionary of Microsoft 365 tools and their features
 tools = {
-    "Microsoft 365 Features": ["Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Desktop versions of Microsoft 365 apps","Microsoft Teams (Collaboration and Communication Platform)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Stream (Video Sharing)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"],
-    "Do you have more than 300 employees in need of licenses?": ["Yes", "No"],
+    "Microsoft 365 Features": ["Desktop versions of Microsoft Word, Excel, PowerPoint, Outlook, and OneDrive","Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Microsoft Teams (Collaboration and Communication Platform)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Stream (Video Sharing)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)","Desktop Version of Microsoft Teams", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"],
 }
+
+featurelist = ["Desktop versions of Microsoft Word, Excel, PowerPoint, Outlook, and OneDrive","Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Microsoft Teams (Collaboration and Communication Platform)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Stream (Video Sharing)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)","Desktop Version of Microsoft Teams", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"]
+
 
 
 @app.route('/')
 def index():
     return render_template('index.html', tools=tools)
+
+@app.route('/proofofconcept', methods = ['POST'])
+def proofofconcept():
+    plan = 'Microsoft 365 Apps for Business ' #So this is the default state, added space so I can differentiate between when it is changed ot it rather than default
+    selected_features = request.form.getlist('features[]')
+    sizeOfCompany = request.form['size']
+    print(sizeOfCompany)
+    features_selected = [False] * len(featurelist)
+    for feature in selected_features:
+        index = featurelist.index(feature)
+        features_selected[index] = True
+    if sizeOfCompany == "Yes":
+        plan = 'Some Enterprise Level Plan'
+    else:
+        if features_selected[0]:
+            plan = 'Microsoft 365 Apps for Business'
+        if True in features_selected[1:13]:
+            if plan == 'Microsoft 365 Apps for Business':
+                plan = 'Microsoft 365 Business Standard'
+            else:
+                plan = 'Microsoft 365 Business Basic'
+        if True in features_selected[13:17]:
+            plan = 'Microsoft 365 Business Standard'
+        if True in features_selected[17:21]:
+            plan = 'Microsoft 365 Business Premium'
+    
+    plan = plan.rstrip()
+    return render_template('concept.html', plan = plan)
 
 @app.route('/recommend', methods=['POST'])
 def recommend():

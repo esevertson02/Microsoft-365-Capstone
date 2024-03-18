@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h1>Microsoft 365 Licensing Tool Recommendation</h1>
-        <form action="{{ url_for('recommend') }}" method="post">
+        <form action="{{ url_for('proofofconcept') }}" method="post">
             <h2>Every plan comes with:</h2>
             <p>1 TB Cloud Storage per user - Anytime Phone and Web Support - File Access from Computer, Tablet, or Phone
                 - Real-Time Coauthoring and Editing - Spam and Malware Cloud-Based Email Filtering - Password Policy
@@ -26,11 +26,20 @@
                 <h3>{{ plan }}</h3>
                 {% for feature in features %}
                 <label>
-                    <input type="checkbox" name="features" value="{{ feature }}"> {{ feature }}
+                    <input type="checkbox" name="features[]" value="{{ feature }}"> {{ feature }}
                 </label>
                 {% endfor %}
             </div>
             {% endfor %}
+            <strong>
+                <h3>Do you have more than 300 employees in need of licenses?</h3>
+            </strong>
+            <label>
+                <input type="radio" name="size" value="Yes"> Yes
+            </label>
+            <label>
+                <input type="radio" name="size" value="No"> No
+            </label>
             <button type="submit">Recommend Licensing Plan</button>
         </form>
     </div>
