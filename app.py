@@ -23,7 +23,7 @@ def index():
 def proofofconcept():
     plan = 'Microsoft 365 Apps for Business ' #So this is the default state, added space so I can differentiate between when it is changed ot it rather than default
     selected_features = request.form.getlist('features[]')
-    sizeOfCompany = request.form['size', None]
+    sizeOfCompany = request.form['size']
     features_selected = [False] * len(featurelist)
     for feature in selected_features:
         index = featurelist.index(feature)
