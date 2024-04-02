@@ -37,10 +37,18 @@
 </head>
 
 <body>
+    <u>
+        <h2 style="text-align: center;">Every Plan Comes With</h2>
+    </u>
+    <p>1 TB Cloud Storage per user - Anytime Phone and Web Support - File Access from
+        Computer, Tablet, or Phone
+        - Real-Time Coauthoring and Editing - Spam and Malware Cloud-Based Email Filtering - Password Policy
+        Management - Multifactor Authentication - Security Groups and Custom Permissions - Web and Mobile
+        Versions of Word, Excel, PowerPoint, and OneNote</p>
     <div id="feature-container">
-        <h2 id="feature-title">Group Name</h2>
+        <h2>Group Name</h2>
         <ul id="feature-list">
-            <!-- Feature list will be populated here -->
+
         </ul>
     </div>
     <div id="choices-container">
@@ -48,42 +56,7 @@
         <button id="accept" class="feature-btn">I want these features</button>
     </div>
 
-    <script>
-        let currentIndex = 0;
-        let userChoices = [];
 
-        function updateFeatures(index) {
-            fetch(`/get-features/${index}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.features.length === 0) {
-                        document.getElementById('feature-container').innerHTML = '<h2>Selection Complete</h2>';
-                        console.log(userChoices); // Here you would probably send this data back to the server or to another page.
-                        return;
-                    }
-
-                    document.getElementById('feature-title').textContent = data.name;
-                    const featureList = document.getElementById('feature-list');
-                    featureList.innerHTML = '';
-                    data.features.forEach(feature => {
-                        featureList.innerHTML += `<li>${feature}</li>`;
-                    });
-                });
-        }
-
-        document.getElementById('accept').addEventListener('click', function () {
-            userChoices.push({ group: feature_groups[currentIndex].name, choice: 'accepted' });
-            updateFeatures(++currentIndex);
-        });
-
-        document.getElementById('reject').addEventListener('click', function () {
-            userChoices.push({ group: feature_groups[currentIndex].name, choice: 'rejected' });
-            updateFeatures(++currentIndex);
-        });
-
-        // Initialize first feature group
-        updateFeatures(currentIndex);
-    </script>
 </body>
 
 </html>
