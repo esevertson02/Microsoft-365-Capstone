@@ -37,24 +37,64 @@
 </head>
 
 <body>
+    <!-- <p>Groups available: {{ groups[1] | list | join(", ") }}</p> This was a debug statement-->
     <u>
         <h2 style="text-align: center;">Every Plan Comes With</h2>
     </u>
+    <!-- <h2 id="debug">This is my Debug</h2> -->
     <p>1 TB Cloud Storage per user - Anytime Phone and Web Support - File Access from
         Computer, Tablet, or Phone
         - Real-Time Coauthoring and Editing - Spam and Malware Cloud-Based Email Filtering - Password Policy
         Management - Multifactor Authentication - Security Groups and Custom Permissions - Web and Mobile
         Versions of Word, Excel, PowerPoint, and OneNote</p>
     <div id="feature-container">
-        <h2>Group Name</h2>
+        <h2 id='group'></h2>
         <ul id="feature-list">
-
         </ul>
     </div>
     <div id="choices-container">
         <button id="reject" class="feature-btn">I don't want these features</button>
         <button id="accept" class="feature-btn">I want these features</button>
     </div>
+
+    <script type="text/javascript">
+        console.log('script is up')
+        let currentindex = 0
+        var groups = {{ groups | safe}}
+        var features = {{ features | safe}}
+        var size = {{ size | safe}}
+        const featuresList = document.getElementById('feature-list');
+        function updatePage() {
+            if (currentindex < size) {
+                featuresList.innerHTML = '';
+                document.getElementById('group').textContent = groups[currentindex];
+                features[currentindex].forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    featuresList.appendChild(li);
+                });
+            } else {
+                document.getElementById('feature-container').innerHTML = '<h2>All features reviewed</h2>';
+                document.getElementById('accept').textContent = "Get Recommendation!";
+                document.getElementById('reject').style.visibility = 'hidden';
+                document.getElementById('accept').onclick = function () {
+                    window.location.href = '/finalRecommend';
+                };
+            }
+
+
+        }
+        document.getElementById('accept').addEventListener('click', function () {
+            currentindex++
+            updatePage();
+        }
+        );
+        document.getElementById('reject').addEventListener('click', function () {
+            currentindex++
+            updatePage();
+        });
+        updatePage();
+    </script>
 
 
 </body>

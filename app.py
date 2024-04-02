@@ -1,5 +1,6 @@
 import pandas as pd
 from flask import Flask, render_template, request
+import json
 
 app = Flask(__name__)
 
@@ -11,26 +12,38 @@ tools = {
     "Microsoft 365 Features": ["Desktop versions of Microsoft Word, Excel, PowerPoint, Outlook, and OneDrive","Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Microsoft Teams (Collaboration and Communication Platform)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Stream (Video Sharing)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)","Desktop Version of Microsoft Teams", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"],
 }
 
-featurelist = ["Desktop versions of Microsoft Word, Excel, PowerPoint, Outlook, and OneDrive","Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Microsoft Teams (Collaboration and Communication Platform)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Stream (Video Sharing)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)","Desktop Version of Microsoft Teams", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"]
+featurelist = [
+ ['Advanced Threat Protection (ATP)', 'Data Loss Prevention (DLP)', 'Mobile Device Management (MDM)', 'Multi-Factor Authentication (MFA)'],
+ ['Microsoft Teams', 'Exchange Online', 'SharePoint Online'],
+ ['Office Applications', 'OneDrive for Business', 'Outlook Customer Manager'],
+ ['Information Protection', 'eDiscovery', 'Audit Logs'],
+ ['Admin Console', 'Intune', 'Windows Autopilot'],
+ ['Exchange Online Protection', 'Skype for Business', 'Yammer'],
+ ['MyAnalytics', 'Power BI Pro']
+]
 
-feature_groups = [
-    {"name": "Security", "features": ["test1", "test2", "test3"]},
-    {"name": "Video Editing", "features": ["Microsoft Clipchamp", "test4", "test5"]},
+
+groupList = ["Security","Collaboration","Productivity","Compliance and Legal","Administration and IT","Communication","Analytics"
 ]
 
 @app.route('/index')
 def index():
     return render_template('index.html', tools=tools)
 
+@app.route('/finalRecommend')
+def finalRecommend():
+    return render_template('finalRecommend.html')
+
 @app.route('/features')
 def features():
-    return render_template('features.html', features=featurelist)
+    groups = groupList
+    return render_template('features.html', groups = groups,features=featurelist, size = len(groups))
 
 @app.route('/')
 def welcome():
     return render_template('welcome.html')
 
-@app.route('/proofofconcept', methods = ['POST'])
+'''@app.route('/proofofconcept', methods = ['POST'])
 def proofofconcept():
     plan = 'Microsoft 365 Apps for Business ' #So this is the default state, added space so I can differentiate between when it is changed ot it rather than default
     selected_features = request.form.getlist('features[]')
@@ -56,7 +69,7 @@ def proofofconcept():
     
     plan = plan.rstrip()
     return render_template('concept.html', plan = plan)
-
+'''
 @app.route('/recommend', methods=['POST'])
 def recommend():
     selected_features = request.form.getlist('features')
