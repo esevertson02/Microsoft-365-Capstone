@@ -42,15 +42,16 @@
         <h2 style="text-align: center;">Every Plan Comes With</h2>
     </u>
     <!-- <h2 id="debug">This is my Debug</h2> -->
+    <div id="feature-description">
     <p>1 TB Cloud Storage per user - Anytime Phone and Web Support - File Access from
-        Computer, Tablet, or Phone
-        - Real-Time Coauthoring and Editing - Spam and Malware Cloud-Based Email Filtering - Password Policy
-        Management - Multifactor Authentication - Security Groups and Custom Permissions - Web and Mobile
+        Computer, Tablet, or Phone - Real-Time Coauthoring and Editing - Spam and Malware Cloud-Based Email Filtering - Password Policy
+        Management - Multifactor Authentication - Security Groups and Custom Permissions - Web and Mobile 
         Versions of Word, Excel, PowerPoint, and OneNote</p>
+    </div>
     <div id="feature-container">
         <h2 id='group'></h2>
-        <ul id="feature-list">
-        </ul>
+        <div id="feature-list">
+        </div>
     </div>
     <div id="choices-container">
         <button id="reject" class="feature-btn">I don't want these features</button>
@@ -69,9 +70,10 @@
                 featuresList.innerHTML = '';
                 document.getElementById('group').textContent = groups[currentindex];
                 features[currentindex].forEach(feature => {
-                    const li = document.createElement('li');
-                    li.textContent = feature;
-                    featuresList.appendChild(li);
+                const div = document.createElement('div');
+                div.textContent = feature;
+                div.classList.add('feature-item'); // Added a class for styling
+                featuresList.appendChild(div);
                 });
             } else {
                 document.getElementById('feature-container').innerHTML = '<h2>All features reviewed</h2>';
