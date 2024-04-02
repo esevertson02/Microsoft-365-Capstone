@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        #feature-container {
+            text-align: center;
+            margin: 20px;
+        }
+
+        #feature-title {
+            margin-bottom: 10px;
+
+        }
+
+        #feature-list {
+            margin-bottom: 20px;
+        }
+
+        .feature-btn {
+            padding: 20px;
+            margin: 10px;
+        }
+
+        #choices-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="feature-container">
+        <h2 id="feature-title">Group Name</h2>
+        <ul id="feature-list">
+            <!-- Feature list will be populated here -->
+        </ul>
+    </div>
+    <div id="choices-container">
+        <button id="reject" class="feature-btn">I don't want these features</button>
+        <button id="accept" class="feature-btn">I want these features</button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let userChoices = [];
+
+        function updateFeatures(index) {
+            fetch(`/get-features/${index}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.features.length === 0) {
+                        document.getElementById('feature-container').innerHTML = '<h2>Selection Complete</h2>';
+                        console.log(userChoices); // Here you would probably send this data back to the server or to another page.
+                        return;
+                    }
+
+                    document.getElementById('feature-title').textContent = data.name;
+                    const featureList = document.getElementById('feature-list');
+                    featureList.innerHTML = '';
+                    data.features.forEach(feature => {
+                        featureList.innerHTML += `<li>${feature}</li>`;
+                    });
+                });
+        }
+
+        document.getElementById('accept').addEventListener('click', function () {
+            userChoices.push({ group: feature_groups[currentIndex].name, choice: 'accepted' });
+            updateFeatures(++currentIndex);
+        });
+
+        document.getElementById('reject').addEventListener('click', function () {
+            userChoices.push({ group: feature_groups[currentIndex].name, choice: 'rejected' });
+            updateFeatures(++currentIndex);
+        });
+
+        // Initialize first feature group
+        updateFeatures(currentIndex);
+    </script>
+</body>
+
+</html>

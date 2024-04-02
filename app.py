@@ -13,11 +13,22 @@ tools = {
 
 featurelist = ["Desktop versions of Microsoft Word, Excel, PowerPoint, Outlook, and OneDrive","Identity, Access and User Management","Host and Administer 50GB Mailboxes", "Custom Business Emails","Web and Mobile version of Outlook", "Microsoft Teams (Collaboration and Communication Platform)", "Microsoft SharePoint (Web-based Collaboration Platform)","Microsoft Stream (Video Sharing)","Microsoft Bookings (Appointment Scheduling Service)","Microsoft Planner (Project Management Tool)", "Microsoft Forms (Online Surveys and Quizzes)", "Microsoft Lists (Task and Information Management)","Desktop Version of Microsoft Teams", "Microsoft Access (Database Management System)", "Microsoft Publisher (Desktop Publishing Software)", "Microsoft Loop (Webinar Hosting and Functionality)","Microsoft Clipchamp (Video Editing)", "Advanced Threat Protection (Necessary for Compliance in Some Cases)", "Microsoft EntraID (Protect Employee Identities)","Microsoft Intune (Cloud-based Mobile Device and Application Management)", "Azure Information Protection (Data Security and Encryption Service)"]
 
+feature_groups = [
+    {"name": "Security", "features": ["test1", "test2", "test3"]},
+    {"name": "Video Editing", "features": ["Microsoft Clipchamp", "test4", "test5"]},
+]
 
-
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html', tools=tools)
+
+@app.route('/features')
+def features():
+    return render_template('features.html', features=featurelist)
+
+@app.route('/')
+def welcome():
+    return render_template('welcome.html')
 
 @app.route('/proofofconcept', methods = ['POST'])
 def proofofconcept():
