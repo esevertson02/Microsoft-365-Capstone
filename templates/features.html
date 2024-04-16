@@ -48,24 +48,42 @@
         Management - Multifactor Authentication - Security Groups and Custom Permissions - Web and Mobile 
         Versions of Word, Excel, PowerPoint, and OneNote</p>
     </div>
+    <div>
+        <u><h2 style="text-align: center;">Click on Features to Choose Specific Functionality You Want!</h2></u>
+    </div>
     <div id="feature-container">
         <h2 id='group'></h2>
         <div id="feature-list">
         </div>
     </div>
     <div id="choices-container">
-        <button id="reject" class="feature-btn">I don't want these features</button>
-        <button id="accept" class="feature-btn">I want these features</button>
+        <button id="reject" class="feature-btn">Back</button>
+        <button id="accept" class="feature-btn">Next Features</button>
     </div>
 
     <script type="text/javascript">
         console.log('script is up')
+        let selectedItems = [];
         let currentindex = 0
         var groups = {{ groups | safe}}
         var features = {{ features | safe}}
         var size = {{ size | safe}}
         var microFeatures = {{microFeatures | safe}}
         const featuresList = document.getElementById('feature-list');
+        //Update Checks
+        function updateSelection(checkbox) {
+            if (checkbox.checked) {
+                selectedItems.push(checkbox.value);
+            } else {
+                const index = selectedItems.indexOf(checkbox.value);
+                if (index > -1) {
+                    selectedItems.splice(index, 1);
+                }
+            }
+            // document.getElementById('debug').innerText = selectedItems; Debug statement I used
+        }
+
+        //Update Page
         function updatePage() {
             if (currentindex < size) {
                 let microindex = 0
@@ -81,22 +99,36 @@
                 featuresList.appendChild(div);
                 //ADD MICRO FEATURES THIS WILL BE BAD TO START
                 const featureContainer = document.createElement('div');
+                featureContainer.classList.add('feature-check')
                 featureContainer.style.display = 'none'; 
                 microFeatures[currentindex][microindex].forEach(microFeature =>{
                     const label = document.createElement('label');
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
                     checkbox.value = microFeature;
+                    if (selectedItems.includes(checkbox.value) ){
+                        checkbox.checked = true
+                    }
+                    checkbox.onchange = function() { updateSelection(checkbox); };
                     label.appendChild(checkbox);
                     label.appendChild(document.createTextNode(' ' + microFeature)); 
-                    label.classList.add('feature-item');
                     featureContainer.appendChild(label);
                     });
                     microindex++
                     featuresList.appendChild(featureContainer);
                 });
             } else {
-                document.getElementById('feature-container').innerHTML = '<h2>All features reviewed</h2>';
+                let container = document.getElementById('feature-container');
+                container.innerHTML = '<h2>Selected Features</h2>';
+                let list = document.createElement('ul');
+                selectedItems.forEach(function(item) {
+                    let listItem = document.createElement('li');
+                    listItem.textContent = item; 
+                    list.appendChild(listItem); 
+                });
+
+               
+                container.appendChild(list);
                 document.getElementById('accept').textContent = "Get Recommendation!";
                 document.getElementById('reject').style.visibility = 'hidden';
                 document.getElementById('accept').onclick = function () {
@@ -112,7 +144,7 @@
         }
         );
         document.getElementById('reject').addEventListener('click', function () {
-            currentindex++
+            currentindex--
             updatePage();
         });
         updatePage();
