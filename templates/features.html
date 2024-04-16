@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    <!-- <p>Groups available: {{ groups[1] | list | join(", ") }}</p> This was a debug statement-->
+    <!-- <p>Groups available: {{ microFeatures[0][0] | list | join(", ") }}</p> This was a debug statement -->
     <u>
         <h2 style="text-align: center;">Every Plan Comes With</h2>
     </u>
@@ -64,16 +64,36 @@
         var groups = {{ groups | safe}}
         var features = {{ features | safe}}
         var size = {{ size | safe}}
+        var microFeatures = {{microFeatures | safe}}
         const featuresList = document.getElementById('feature-list');
         function updatePage() {
             if (currentindex < size) {
+                let microindex = 0
                 featuresList.innerHTML = '';
                 document.getElementById('group').textContent = groups[currentindex];
                 features[currentindex].forEach(feature => {
                 const div = document.createElement('div');
                 div.textContent = feature;
                 div.classList.add('feature-item'); // Added a class for styling
+                div.onclick = function(){
+                    this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? 'block' : 'none';
+                };
                 featuresList.appendChild(div);
+                //ADD MICRO FEATURES THIS WILL BE BAD TO START
+                const featureContainer = document.createElement('div');
+                featureContainer.style.display = 'none'; 
+                microFeatures[currentindex][microindex].forEach(microFeature =>{
+                    const label = document.createElement('label');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.value = microFeature;
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(' ' + microFeature)); 
+                    label.classList.add('feature-item');
+                    featureContainer.appendChild(label);
+                    });
+                    microindex++
+                    featuresList.appendChild(featureContainer);
                 });
             } else {
                 document.getElementById('feature-container').innerHTML = '<h2>All features reviewed</h2>';

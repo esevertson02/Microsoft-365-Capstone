@@ -22,6 +22,8 @@ featurelist = [
  ['MyAnalytics', 'Power BI Pro']
 ]
 
+microFeatures = [[['x','f','z'],['d'],['a','python'],['d']],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[]]]
+
 
 groupList = ["Security","Collaboration","Productivity","Compliance and Legal","Administration and IT","Communication","Analytics"
 ]
@@ -37,7 +39,7 @@ def finalRecommend():
 @app.route('/features')
 def features():
     groups = groupList
-    return render_template('features.html', groups = groups,features=featurelist, size = len(groups))
+    return render_template('features.html', groups = groups,features=featurelist, size = len(groups), microFeatures = microFeatures)
 
 @app.route('/')
 def welcome():
