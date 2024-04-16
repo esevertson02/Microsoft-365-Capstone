@@ -120,15 +120,23 @@
             } else {
                 let container = document.getElementById('feature-container');
                 container.innerHTML = '<h2>Selected Features</h2>';
-                let list = document.createElement('ul');
+                let checkboxContainer = document.createElement('div');
                 selectedItems.forEach(function(item) {
-                    let listItem = document.createElement('li');
-                    listItem.textContent = item; 
-                    list.appendChild(listItem); 
-                });
+                    let checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = item;
+                    checkbox.value = item;
+                    checkbox.checked = true;
+                    checkbox.addEventListener('change', updateSelection);
+                    let label = document.createElement('label');
+                    label.htmlFor = item;
+                    label.textContent = item;
+                    checkboxContainer.appendChild(checkbox);
+                    checkboxContainer.appendChild(label);
+                    checkboxContainer.appendChild(document.createElement('br')); 
+            });
 
-               
-                container.appendChild(list);
+                container.appendChild(checkboxContainer);
                 document.getElementById('accept').textContent = "Get Recommendation!";
                 document.getElementById('reject').style.visibility = 'hidden';
                 document.getElementById('accept').onclick = function () {
