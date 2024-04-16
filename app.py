@@ -22,7 +22,13 @@ featurelist = [
     ['MyAnalytics', 'Power BI Pro']
     ]
 
-microFeatures = [[['Microsoft Defender Advanced Threat Protection','Microsoft Defender Cross Platform','Microsoft Defender for Servers', 'Cyber Threat Intelligence', 'Adallom (Microsoft Cloud App Security)'],['Information Protection Compliance',"Rights Management Services", "Identity Threat Protection"],['Microsoft Intune for Applications', 'Microsoft Intune for Devices'],['MFA Standalone (For Independent Use From Microsoft)']],[['Teams Essential','Teams Meetings Advanced','Teams Events','Teams Audio Conference Dial Out', 'Teams Premium', 'Teams Rooms Basic', 'Teams Rooms Pro'],['Exchange Standard','Exchange Archive','Exchange Essentials','Exchange Deskless/Kiosk','Exchange Online Telecom'],['SharePoint Online Standard', 'SharePoint Online Enterprise', 'SharePoint Online Plan 1', 'SharePoint Online Plan 2', 'SharePoint Additional Storage', 'SharePoint for Midsize Business', 'OneDrive for Business Web Access Standard', 'OneDrive for Business Web Access Enterprise', 'Microsoft Stream Integration with SharePoint']],[['Office Applications Standard', 'Office Applications ProPlus', 'Desktop Apps'],['OneDrive for Business Basic', 'OneDrive for Business Standard'],[]],[[],[],[]],[[],[],[]],[[],[],[]],[[],[]]]
+microFeatures = [[['Microsoft Defender Advanced Threat Protection','Microsoft Defender Cross Platform','Microsoft Defender for Servers', 'Cyber Threat Intelligence', 'Adallom (Microsoft Cloud App Security)'],['Information Protection Compliance',"Rights Management Services", "Identity Threat Protection"], ['Microsoft Intune for Applications', 'Microsoft Intune for Devices'],['MFA Standalone (For Independent Use From Microsoft)']],
+                 [['Teams Essential','Teams Meetings Advanced','Teams Events','Teams Audio Conference Dial Out', 'Teams Premium', 'Teams Rooms Basic', 'Teams Rooms Pro'],['Exchange Standard','Exchange Archive','Exchange Essentials','Exchange Deskless/Kiosk','Exchange Online Telecom'],['SharePoint Online Standard', 'SharePoint Online Enterprise', 'SharePoint Online Plan 1', 'SharePoint Online Plan 2', 'SharePoint Additional Storage', 'SharePoint for Midsize Business', 'OneDrive for Business Web Access Standard', 'OneDrive for Business Web Access Enterprise', 'Microsoft Stream Integration with SharePoint']],
+                 [['Office Applications Standard', 'Office Applications ProPlus', 'Desktop Apps'],['OneDrive for Business Basic', 'OneDrive for Business Standard'],['Customer Relationship Management Tools',]],
+                 [[],[],[]],
+                 [[],[],[]],
+                 [[],[],[]],
+                 [[],[]]]
 
 
 groupList = ["Security","Collaboration","Productivity","Compliance and Legal","Administration and IT","Communication","Analytics"
