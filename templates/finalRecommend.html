@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Final Recommendation</title>
     <style>
-        body,
-        html {
+        body, html {
             height: 100%;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            flex-direction: column;
             background-color: #f0f0f0;
         }
 
-        .recommendation {
+        .recommendation, .details {
             font-size: 2em;
             font-weight: bold;
             text-align: center;
         }
+        .details {
+            margin-top: 20px; 
+            font-size: 1.5em;
+        }
     </style>
 </head>
-
 <body>
-
     <div class="recommendation">
         FINAL RECOMMENDATION WILL BE HERE
     </div>
+    <div class="details">
+        This should be filled with details
+    </div>
 
+    <script>
+        function getQueryParam(name) {
+            var urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        var plan = getQueryParam('plan');
+        var detailsElement = document.querySelector('.details');
+        
+        if (plan === 'Basic') {
+            document.querySelector('.recommendation').textContent = 'Your plan: Microsoft 365 Business Basic';
+                detailsElement.textContent = 'Annual Subscription Cost: $72.00/user - Annual Paid Monthly Cost: $86.40/user';
+            } else if (plan === 'Apps') {
+                document.querySelector('.recommendation').textContent = 'Your plan: Microsoft 365 Apps for Business';
+                detailsElement.textContent = 'Annual Subscription Cost: $99.00/user - Annual Paid Monthly Cost: $118.80/user';
+
+            } 
+            else if (plan === 'Standard') {
+                document.querySelector('.recommendation').textContent = 'Your plan: Microsoft 365 Business Standard';
+                detailsElement.textContent = 'Annual Subscription Cost: $150.00/user - Annual Paid Monthly Cost: $180.00/user';
+
+            }
+            else {
+                detailsElement.textContent = 'Error in Application';
+            }
+
+    </script>
 </body>
-
 </html>

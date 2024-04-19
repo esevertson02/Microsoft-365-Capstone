@@ -120,6 +120,7 @@
             } else {
                 let container = document.getElementById('feature-container');
                 container.innerHTML = '<h2>Selected Features</h2>';
+
                 let checkboxContainer = document.createElement('div');
                 selectedItems.forEach(function(item) {
                     let checkbox = document.createElement('input');
@@ -136,11 +137,21 @@
                     checkboxContainer.appendChild(document.createElement('br')); 
             });
 
+                //THIS WILL BE BETTER LICENSING LOGIC EVENTUALLY I WILL MAKE IT A SWITCH IM JUST LAZY AF RN
+                var plan = '';
+                if(selectedItems.length == 0){
+                    plan = 'Basic'
+                }
+                else if(selectedItems.length == 1){
+                    plan = 'Apps'
+                }
+                else if(selectedItems.length > 1){
+                    plan = 'Standard'
+                }
                 container.appendChild(checkboxContainer);
                 document.getElementById('accept').textContent = "Get Recommendation!";
-                document.getElementById('reject').style.visibility = 'hidden';
                 document.getElementById('accept').onclick = function () {
-                    window.location.href = '/finalRecommend';
+                    window.location.href = '/finalRecommend?plan=' + encodeURIComponent(plan);
                 };
             }
 
@@ -152,8 +163,10 @@
         }
         );
         document.getElementById('reject').addEventListener('click', function () {
-            currentindex--
-            updatePage();
+            if(currentindex > 0){
+                currentindex--
+                updatePage();
+            }
         });
         updatePage();
     </script>
