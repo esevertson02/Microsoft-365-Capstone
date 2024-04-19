@@ -21,7 +21,16 @@ h1 {
 h2 {
     color: #323130;
     font-size: 1.5rem;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    color: #0078d4;
+    font-size: 2.0rem;
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
 
 .plan {
@@ -100,7 +109,7 @@ th {
     width: 50%; 
     text-align: center;
     box-sizing: border-box;   
-    padding-bottom: 20px;
+    padding-bottom: 0;
     margin-bottom: 0; 
 }
 
@@ -137,6 +146,22 @@ th {
 
 .feature-btn:hover {
     background-color: #005a9e;
+}
+
+#search-container {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    padding: 20px;
+}
+
+#feature-search {
+    width: 200px; 
+    padding: 5px 10px; 
+    font-size: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    margin-right: 20px; 
 }
 
 

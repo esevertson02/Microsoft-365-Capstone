@@ -38,6 +38,13 @@
 
 <body>
     <!-- <p>Groups available: {{ microFeatures[0][0] | list | join(", ") }}</p> This was a debug statement -->
+    <header>
+        <h3 style="color: #005A9E; ">Microsoft 365</h3>
+        <div id="search-container">
+            <input type="text" id="feature-search" placeholder="Search features..." aria-label="Search features">
+        </div>
+    </header>
+
     <u>
         <h2 style="text-align: center;">Every Plan Comes With</h2>
     </u>
@@ -57,9 +64,10 @@
         </div>
     </div>
     <div id="choices-container">
-        <button id="reject" class="feature-btn">Back</button>
+        <button id="reject" class="feature-btn" style="visibility: hidden;">Back</button>
         <button id="accept" class="feature-btn">Next Features</button>
     </div>
+
 
     <script type="text/javascript">
         console.log('script is up')
@@ -144,20 +152,44 @@
                 };
             }
 
-
+            if (currentindex > 0) {
+            document.getElementById('reject').style.visibility = 'visible';
+        } else {
+            document.getElementById('reject').style.visibility = 'hidden';
         }
+        }
+        
         document.getElementById('accept').addEventListener('click', function () {
             currentindex++
             updatePage();
         }
         );
         document.getElementById('reject').addEventListener('click', function () {
-            currentindex--
+            if (currentindex > 0) {
+            currentindex--;
             updatePage();
+        }
         });
         updatePage();
-    </script>
 
+        document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('feature-search');
+
+            searchInput.addEventListener('keyup', function(e) {
+            const term = e.target.value.toLowerCase();
+            const features = document.querySelectorAll('#feature-list .feature-item');
+
+                features.forEach(function(feature) {
+                const text = feature.textContent.toLowerCase();
+                    if (text.includes(term)) {
+                    feature.style.display = 'block';
+                    } else {
+                    feature.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
