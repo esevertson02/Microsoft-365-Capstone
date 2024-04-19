@@ -19,7 +19,8 @@ featurelist = [
     ['Information Protection', 'eDiscovery', 'Audit Logs'],
     ['Admin Console', 'Intune', 'Windows Autopilot'],
     ['Exchange Online Protection', 'Skype for Business', 'Yammer'],
-    ['MyAnalytics', 'Power BI Pro']
+    ['MyAnalytics', 'Power BI Pro'],
+    ['Company Size','Company Type']
     ]
 
 microFeatures = [[['Microsoft Defender Advanced Threat Protection','Microsoft Defender Cross Platform','Microsoft Defender for Servers', 'Cyber Threat Intelligence', 'Adallom (Microsoft Cloud App Security)'],['Information Protection Compliance',"Rights Management Services", "Identity Threat Protection"], ['Microsoft Intune for Applications', 'Microsoft Intune for Devices'],['MFA Standalone (For Independent Use From Microsoft)']],
@@ -28,10 +29,11 @@ microFeatures = [[['Microsoft Defender Advanced Threat Protection','Microsoft De
                  [[],[],[]],
                  [[],[],[]],
                  [[],[],[]],
-                 [[],[]]]
+                 [[],[]],
+                 [['Need More Than 300 Licenses'],['Work Closely With Compliance Standards (HIPAA,FERPA,etc.)']]]
 
 
-groupList = ["Security","Collaboration","Productivity","Compliance and Legal","Administration and IT","Communication","Analytics"
+groupList = ["Security","Collaboration","Productivity","Compliance and Legal","Administration and IT","Communication","Analytics","General Questions"
 ]
 
 @app.route('/index')
